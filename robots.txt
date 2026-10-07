@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dizirttidi.github.io/construction-site/sitemap.xml
