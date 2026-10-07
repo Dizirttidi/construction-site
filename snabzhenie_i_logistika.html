@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Снабжение и логистика — Доставка стройматериалов за 4 часа</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    line-height: 1.6;
+    color: #222;
+    /* Фоновое изображение */
+    background-image: url('8c92deb3c1f511f186eb82d6dc1823f5_1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+  }
+
+  /* Полупрозрачный слой для читаемости контента */
+  .overlay {
+    background: rgba(255, 255, 255, 0.92);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #1a3a5c, #2c5f8a);
+    color: #fff;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    background: #f0a500;
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+  }
+
+  .header-title h1 {
+    font-size: 1.4rem;
+    margin: 0;
+  }
+
+  .header-title p {
+    font-size: 0.85rem;
+    opacity: 0.85;
+    margin: 0;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+  }
+
+  nav a:hover {
+    color: #f0a500;
+  }
+
+  .header-phone {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f0a500;
+    text-decoration: none;
+  }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #fff;
+    background: linear-gradient(rgba(26,58,92,0.75), rgba(26,58,92,0.85)),
+                url('8c92deb3c1f511f186eb82d6dc1823f5_1.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+  }
+
+  .hero > p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+  }
+
+  .hero .highlight {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.9rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .btn-primary {
+    background: #f0a500;
+    color: #1a3a5c;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(240,165,0,0.4);
+  }
+
+  .btn-secondary {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border: 2px solid #fff;
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: 3rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section h2 {
+    font-size: 2rem;
+    text-align: center;
+    color: #1a3a5c;
+    margin-bottom: 2rem;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .about-card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    border-top: 4px solid #f0a500;
+  }
+
+  .about-card h3 {
+    font-size: 1.2rem;
+    color: #1a3a5c;
+    margin-bottom: 0.5rem;
+  }
+
+  /* CATALOG */
+  .catalog-section {
+    background: rgba(245,245,245,0.85);
+  }
+
+  .catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .catalog-card {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    transition: box-shadow 0.2s;
+  }
+
+  .catalog-card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+
+  .catalog-card h3 {
+    font-size: 1.1rem;
+    color: #2c5f8a;
+    margin-bottom: 0.5rem;
+    border-bottom: 2px solid #f0a500;
+    padding-bottom: 0.4rem;
+  }
+
+  /* CONDITIONS */
+  .conditions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .condition-card {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .condition-card .label {
+    font-weight: 700;
+    color: #1a3a5c;
+    font-size: 1.05rem;
+  }
+
+  /* CONTACTS */
+  .contacts {
+    background: #1a3a5c;
+    color: #fff;
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .contacts h2 {
+    color: #fff;
+    margin-bottom: 1.5rem;
+  }
+
+  .contacts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .contact-item {
+    padding: 0.8rem;
+  }
+
+  .contact-item .label {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .contact-item .value {
+    font-size: 1.05rem;
+    margin-top: 0.2rem;
+  }
+
+  .contact-item a {
+    color: #f0a500;
+    text-decoration: none;
+  }
+
+  .contacts-cta {
+    margin-top: 1.5rem;
+    font-size: 1.05rem;
+    opacity: 0.9;
+  }
+
+  /* FORM */
+  .form-section {
+    padding: 3rem 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .form-section h2 {
+    text-align: center;
+    color: #1a3a5c;
+    margin-bottom: 1.5rem;
+  }
+
+  form {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .form-success {
+    display: none;
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  label {
+    font-weight: 600;
+    color: #444;
+    font-size: 0.9rem;
+  }
+
+  input, select, textarea {
+    padding: 0.7rem;
+    border: 1.5px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+    font-family: inherit;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: #2c5f8a;
+    outline: none;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  form button {
+    background: #f0a500;
+    color: #1a3a5c;
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(240,165,0,0.4);
+  }
+
+  /* FOOTER */
+  footer {
+    background: #12273d;
+    color: #fff;
+    text-align: center;
+    padding: 1.5rem 2rem;
+    font-size: 0.85rem;
+    opacity: 0.9;
+  }
+
+  footer p {
+    margin: 0.3rem 0;
+  }
+
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+    nav ul {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .hero h2 {
+      font-size: 1.8rem;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="overlay">
+
+    <!-- HEADER -->
+    <header>
+      <div class="header-left">
+        <div class="logo">СИЛ</div>
+        <div class="header-title">
+          <h1>Снабжение и логистика</h1>
+          <p>Оперативная доставка стройматериалов</p>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#about">О нас</a></li>
+          <li><a href="#catalog">Каталог</a></li>
+          <li><a href="#contacts">Контакты</a></li>
+        </ul>
+      </nav>
+      <a href="tel:+79836163252" class="header-phone">+7 (983) 616-32-52</a>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <h2>Доставка за 4 часа</h2>
+      <p>Новая услуга — оперативная доставка на вашу площадку</p>
+      <p class="highlight">Получите необходимые материалы всего за 4 часа с момента подтверждения заявки!</p>
+      <div class="hero-buttons">
+        <a href="#form" class="btn btn-primary">Заказать доставку</a>
+        <a href="tel:+79836163252" class="btn btn-secondary">Позвонить сейчас</a>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <h2>О нас</h2>
+      <div class="about-grid">
+        <div class="about-card">
+          <h3>Скорость</h3>
+          <p>Доставка по Красноярску и окрестностям в течение 4 часов.</p>
+        </div>
+        <div class="about-card">
+          <h3>Ассортимент</h3>
+          <p>Всё необходимое для стройки: от цемента до инструментов.</p>
+        </div>
+        <div class="about-card">
+          <h3>Выгода</h3>
+          <p>Бесплатная доставка по городу от 20 000 ₽.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATALOG -->
+    <section class="section catalog-section" id="catalog">
+      <h2>Что мы привозим</h2>
+      <div class="catalog-grid">
+        <div class="catalog-card">
+          <h3>Строительные смеси</h3>
+          <p>Цемент, штукатурка, шпатлёвка, наливные полы.</p>
+        </div>
+        <div class="catalog-card">
+          <h3>Крепёж и метизы</h3>
+          <p>Болты, гайки, саморезы, анкеры.</p>
+        </div>
+        <div class="catalog-card">
+          <h3>Пиломатериалы</h3>
+          <p>Доска, брус, вагонка, фанера.</p>
+        </div>
+        <div class="catalog-card">
+          <h3>Гидроизоляция и утеплитель</h3>
+          <p>Рулонные материалы, плиты, мембраны.</p>
+        </div>
+        <div class="catalog-card">
+          <h3>Лакокрасочные материалы</h3>
+          <p>Краски, лаки, грунтовки, пропитки.</p>
+        </div>
+        <div class="catalog-card">
+          <h3>Инструменты и расходники</h3>
+          <p>Дрели, уровни, кисти, валики.</p>
+        </div>
+        <div class="catalog-card">
+          <h3>Другое по запросу</h3>
+          <p>Любые материалы под ваш проект.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONDITIONS -->
+    <section class="section">
+      <h2>Наши условия</h2>
+      <div class="conditions-grid">
+        <div class="condition-card">
+          <span class="label">Доставка за 4 часа</span>
+          <span>С момента подтверждения заявки.</span>
+        </div>
+        <div class="condition-card">
+          <span class="label">Режим работы</span>
+          <span>Ежедневно с 8:00 до 20:00. Заявки на следующий день принимаем до 20:00.</span>
+        </div>
+        <div class="condition-card">
+          <span class="label">Бесплатная доставка</span>
+          <span>По городу при заказе от 20 000 ₽.</span>
+        </div>
+        <div class="condition-card">
+          <span class="label">Отсрочка платежа</span>
+          <span>Для постоянных клиентов (условия обсуждаются индивидуально).</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTS -->
+    <section class="contacts" id="contacts">
+      <h2>Контакты</h2>
+      <div class="contacts-grid">
+        <div class="contact-item">
+          <div class="label">Телефон</div>
+          <div class="value"><a href="tel:+79836163252">+7 (983) 616-32-52</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="label">Email</div>
+          <div class="value"><a href="mailto:sil.124@yandex.ru">sil.124@yandex.ru</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="label">Зона доставки</div>
+          <div class="value">Красноярск и окрестности</div>
+        </div>
+        <div class="contact-item">
+          <div class="label">Часы работы</div>
+          <div class="value">Ежедневно с 8:00 до 20:00</div>
+        </div>
+        <div class="contact-item">
+          <div class="label">Telegram</div>
+          <div class="value"><a href="#">Написать в Telegram</a></div>
+        </div>
+      </div>
+      <p class="contacts-cta">Не упустите возможность оптимизировать свои строительные процессы с помощью нашей оперативной и надёжной доставки!</p>
+    </section>
+
+    <!-- FORM -->
+    <section class="form-section" id="form">
+      <h2>Оставить заявку</h2>
+      <div class="form-success" id="successMsg">Заявка отправлена! Мы свяжемся с вами в ближайшее время.</div>
+      <form id="orderForm">
+        <div>
+          <label for="name">Ваше имя</label>
+          <input type="text" id="name" name="name" placeholder="Введите имя" required>
+        </div>
+        <div>
+          <label for="phone">Телефон</label>
+          <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required>
+        </div>
+        <div>
+          <label for="category">Категория материала</label>
+          <select id="category" name="category" required>
+            <option value="">— Выберите категорию —</option>
+            <option>Строительные смеси</option>
+            <option>Крепёж и метизы</option>
+            <option>Пиломатериалы</option>
+            <option>Гидроизоляция и утеплитель</option>
+            <option>Лакокрасочные материалы</option>
+            <option>Инструменты и расходники</option>
+            <option>Другое по запросу</option>
+          </select>
+        </div>
+        <div>
+          <label for="address">Адрес площадки</label>
+          <input type="text" id="address" name="address" placeholder="г. Красноярск, ул. ..." required>
+        </div>
+        <div>
+          <label for="comment">Комментарий</label>
+          <textarea id="comment" name="comment" placeholder="Дополнительные пожелания..."></textarea>
+        </div>
+        <button type="submit">Отправить заявку</button>
+      </form>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>© 2026 Снабжение и логистика. Все права защищены.</p>
+      <p>Сайт разработан для оперативной доставки стройматериалов.</p>
+    </footer>
+
+  </div>
+
+  <script>
+    document.getElementById('orderForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('successMsg').style.display = 'block';
+      this.reset();
+      setTimeout(function() {
+        document.getElementById('successMsg').style.display = 'none';
+      }, 5000);
+    });
+  </script>
+</body>
+</html>
